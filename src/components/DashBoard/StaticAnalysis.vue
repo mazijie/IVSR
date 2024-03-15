@@ -13,7 +13,7 @@
       <div id="logo" style="margin: 20px">
         <n-space>
         <img width="50" src="@/assets/logo.jpg" alt="LOGO" style="border-radius: 15px;"/>
-        <span style="user-select:none;font-family: Cambria,ARIZONA,SimHei,serif;font-size: 50px;font-weight: bolder;color: #000000;line-height: 50px">MAGISK</span>
+        <span style="user-select:none;font-family: Cambria,ARIZONA,SimHei,serif;font-size: 50px;font-weight: bolder;color: #000000;line-height: 50px">IVSR</span>
         </n-space>
       </div>
       <n-space vertical>
@@ -54,6 +54,7 @@
                 <li><p>名称：{{app_info.app_name}}</p></li>
                 <li><p>包名：{{app_info.package_name}}</p></li>
                 <li><p>安装包大小：{{app_info.size}}</p></li>
+                <li><p>安全性评分：{{((1-malware_score)*100).toFixed(3)}}(满分100)</p></li>
               </ul>
             </div>
           </div>
@@ -334,7 +335,8 @@
           </div>
         </div>
         <div v-else-if="mode===9">
-          <p class="sub_title">·潜在密钥分析(共{{secrets_results.possible_secrets.length}}个)</p>
+          <p class="sub_title" v-if="secrets_results!==null">·潜在密钥分析(共{{secrets_results.possible_secrets.length}}个)</p>
+          <p class="sub_title" v-else>·潜在密钥分析(共0个)</p>
           <div class="sub_block" style="max-height: 650px">
             <div style="width:900px;margin:20px;padding: 20px;border-radius: 20px;background-color: white;overflow-y: scroll;word-break: break-word">
               <p v-if="secrets_results===null||secrets_results.possible_secrets.length===0">未发现潜在的密钥信息</p>
@@ -347,9 +349,16 @@
         </div>
         <div v-else-if="mode===10">
           <p class="sub_title">·机器学习特征分析(共{{key_features.length}}项)</p>
-          <div class="sub_block" style="height: 650px;">
+          <div class="sub_block" style="height: 120px;">
+            <div style="margin: 20px;padding: 10px;border-radius: 10px;background-color: white;width: 860px;">
+              <n-statistic label="潜在恶意性评分(分值越高，恶意性越大)">
+                {{malware_score.toFixed(6)}}/1.000000
+              </n-statistic>
+            </div>
+          </div>
+          <div class="sub_block" style="height: 520px;">
             <div style="margin: 10px;padding: 10px;border-radius: 10px;">
-              <el-table  :data="key_features" width="860px" max-height="600" :stripe="true" :border="true" fit>
+              <el-table  :data="key_features" width="860px" max-height="480" :stripe="true" :border="true" fit>
                 <el-table-column type="index" width="60px"></el-table-column>
                 <el-table-column prop="feature" label="关键特征" width="400px"></el-table-column>
                 <el-table-column label="关联特征" width="400px">
@@ -376,7 +385,7 @@
               </n-space>
             </div>
             <div v-else>
-              <div style="margin:15px;padding:20px;height:580px;width:810px;overflow-y: scroll;white-space: pre-wrap;word-break: break-word;background-color: white;border-radius: 10px">
+              <div style="margin:15px;padding:20px;height:580px;width:830px;overflow-y: scroll;white-space: pre-wrap;word-break: break-word;background-color: white;border-radius: 10px">
                 <n-code :code="report" language="markdown" word-wrap show-line-numbers/>
               </div>
             </div>
@@ -457,6 +466,16 @@ export default {
       return path.split("/").join("%2F");
     }
 
+    const regenerate= ()=>{
+      // if(generating.value==false) return;
+      generateReport({"regenerate":false,"hash":hashcode}).then((res)=>{
+        report.value=res.data;
+        generating.value=false;
+      }).catch((error)=>{
+        console.log("报告生成出现错误："+error);
+      })
+    }
+
     scanFile({"hash":hashcode}).then((res)=>{
       information.value=res;
       analysis(information.value);
@@ -480,7 +499,7 @@ export default {
         report.value=res.data;
         generating.value=false;
       }).catch((error)=>{
-        alert("报告生成出现错误："+error)
+        console.log("报告生成出现错误："+error)
         // router.push('/');
         // message.error("报告生成出现错误："+error);
       })
@@ -569,6 +588,7 @@ export default {
       report,
       generating,
       reversePath,
+      regenerate,
     };
   }
 }

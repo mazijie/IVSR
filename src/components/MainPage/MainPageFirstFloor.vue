@@ -24,8 +24,21 @@ of Simple CSS Waves-->
     <div style="height: 150px;width: 150px;margin: 10px auto;">
       <img width="150" src="@/assets/logo.jpg" alt="LOGO" style="border-radius: 15px;"/>
     </div>
-    <div style="height: 100px;width: 350px;background-color: transparent;margin: 10px auto;text-align: center">
-      <span style="user-select:none;font-family: Cambria,ARIZONA,SimHei,serif;font-size: 80px;font-weight: bolder;color: #f4f2e6;text-shadow: #464444 2px 2px 10px ;offset-after: 10px;">MAGISK</span>
+    <div style="height: 100px;width: 500px;background-color: transparent;margin: 10px auto;text-align: center">
+      <n-space justify="center">
+        <span style="user-select:none;font-family: Cambria,ARIZONA,SimHei,serif;font-size: 90px;font-weight: bolder;color: #f4f2e6;text-shadow: #464444 2px 2px 10px ;offset-after: 10px;">
+          I
+        </span>
+        <span style="user-select:none;font-family: Cambria,ARIZONA,SimHei,serif;font-size: 90px;font-weight: bolder;color: #f4f2e6;text-shadow: #464444 2px 2px 10px ;offset-after: 10px;">
+          V
+        </span>
+        <span style="user-select:none;font-family: Cambria,ARIZONA,SimHei,serif;font-size: 90px;font-weight: bolder;color: #f4f2e6;text-shadow: #464444 2px 2px 10px ;offset-after: 10px;">
+          S
+        </span>
+        <span style="user-select:none;font-family: Cambria,ARIZONA,SimHei,serif;font-size: 90px;font-weight: bolder;color: #f4f2e6;text-shadow: #464444 2px 2px 10px ;offset-after: 10px;">
+          R
+        </span>
+      </n-space>
     </div>
     <div id="enter" style="position:relative;width: 350px;margin: 30px auto;text-align: center;z-index: 9999;color: #858585">
 
@@ -172,6 +185,7 @@ p {
   justify-content: center;
   align-items: center;
   text-align: center;
+  flex-wrap: wrap;
 }
 
 .waves {
