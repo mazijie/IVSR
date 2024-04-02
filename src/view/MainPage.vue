@@ -1,22 +1,23 @@
 <template>
-  <div style="position: absolute;width: 100vw;height: 100vh;top:0;left:0">
-    <main-page-first-floor/>
+  <div style="position: relative;width: 100vw;height: 100px;padding: 0;margin: 0">
+    <nav-line></nav-line>
   </div>
-<!--  <div style="position: absolute;width: 100vw;height: 100vh;top:100vh;left:0">-->
-<!--    <main-page-second-floor/>-->
-<!--  </div>-->
+  <div style="position: relative;width: 100vw;height: calc(100vh - 100px);top:0;left:0;padding: 0;margin: 0">
+    <main-page-new/>
+  </div>
 </template>
 
 <script>
 import router from "@/router";
-import MainPageFirstFloor from "@/components/MainPage/MainPageFirstFloor.vue";
-// import MainPageSecondFloor from "@/components/MainPage/MainPageSecondFloor.vue";
+import MainPageNew from "@/components/MainPage/MainPageNew.vue";
+import NavLine from "@/components/DashBoard/NavLine.vue";
 
 export default {
   name: "MainPage",
   components: {
-    // MainPageSecondFloor,
-    MainPageFirstFloor},
+    NavLine,
+    MainPageNew,
+  },
   methods: {
     router() {
       return router

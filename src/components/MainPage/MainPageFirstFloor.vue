@@ -2,25 +2,6 @@
   <!--Hey! This is the original version
 of Simple CSS Waves-->
   <div class="inner-header" style="z-index: 999">
-    <!--      <div class="flex" style="position:relative;height:35vh;top:10vh">-->
-    <!--      <svg width="87.200000" height="67.800000" viewBox="0 0 436 339" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">-->
-    <!--        <desc>-->
-    <!--          Created with Pixso.-->
-    <!--        </desc>-->
-    <!--        <defs>-->
-    <!--          <clipPath id="clip89_237">-->
-    <!--            <rect id="画板 1" width="436.000000" height="339.000000" fill="white"/>-->
-    <!--          </clipPath>-->
-    <!--        </defs>-->
-    <!--        <rect  fill="#EFEFEF"/>-->
-    <!--        <g clip-path="url(#clip89_237)">-->
-    <!--          <circle id="椭圆 1" r="169.500000" transform="matrix(1 0 0 1 218.5 169.5)" fill="#FFFFFF"/>-->
-    <!--          <path id="矢量 1" d="M159.025 254L85 128.266L145.375 128.266L159.025 205.552L197.875 156.527L184.75 146.722L203.65 115L211 125.959L220.975 119.037L227.275 122.764L236.2 115L254.05 146.722L248.48 152.356L282.925 205.552L300.25 128.266L358 128.266L282.925 254L230.105 170.944L227.275 166.332L159.025 254Z" fill-rule="evenodd" fill="#024888"/>-->
-    <!--          <path id="矢量 1" d="M197.875 156.527L159.025 205.552L145.375 128.266L85 128.266L159.025 254L227.275 166.332L242.91 157.991L248.48 152.356L254.05 146.722L236.2 115L227.275 122.764L217.3 132.88M184.75 146.722L197.875 156.527L211 166.332L227.275 146.722L217.3 132.88L211 125.959L203.65 115L184.75 146.722ZM211 125.959L220.975 119.037L227.275 122.764M227.275 166.332L230.105 170.944L282.925 254L358 128.266L300.25 128.266L282.925 205.552L248.48 152.356" stroke="#FFFFFF"/>-->
-    <!--        </g>-->
-    <!--      </svg>-->
-    <!--      <h1>智行清境</h1>-->
-    <!--      </div>-->
     <div style="height: 150px;width: 150px;margin: 10px auto;">
       <img width="150" src="@/assets/logo.jpg" alt="LOGO" style="border-radius: 15px;"/>
     </div>

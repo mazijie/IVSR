@@ -22,6 +22,7 @@
         background-color="transparent"
         text-color="ffffff"
       >
+        <el-menu-item index="0" @click="mode=0" class="menu-item">简洁报告</el-menu-item>
         <el-menu-item index="1" @click="mode=1" class="menu-item">APP基本信息</el-menu-item>
         <el-menu-item index="2" @click="mode=2" class="menu-item">APP组件信息</el-menu-item>
         <el-menu-item index="3" @click="mode=3" class="menu-item">证书分析</el-menu-item>
@@ -32,7 +33,6 @@
         <el-menu-item index="8" @click="mode=8" class="menu-item">代码分析</el-menu-item>
         <el-menu-item index="9" @click="mode=9" class="menu-item">潜在密钥分析</el-menu-item>
         <el-menu-item index="10" @click="mode=10" class="menu-item">ML分析</el-menu-item>
-        <el-menu-item index="11" @click="mode=11" class="menu-item">简洁报告</el-menu-item>
         <el-menu-item index="12" @click="router().push('/')" class="menu-item">返回主页面</el-menu-item>
       </el-menu>
       </n-space>
@@ -372,7 +372,7 @@
             </div>
           </div>
         </div>
-        <div v-else-if="mode===11">
+        <div v-else-if="mode===0">
           <p class="sub_title">·简洁报告</p>
           <div class="sub_block" style="height: 650px;">
             <div v-if="generating" style="margin: 300px auto">
@@ -385,8 +385,11 @@
               </n-space>
             </div>
             <div v-else>
+              <button @click="exportMD">下载报告</button>
               <div style="margin:15px;padding:20px;height:580px;width:830px;overflow-y: scroll;white-space: pre-wrap;word-break: break-word;background-color: white;border-radius: 10px">
-                <n-code :code="report" language="markdown" word-wrap show-line-numbers/>
+<!--                <n-code :code="report" language="markdown" word-wrap show-line-numbers/>-->
+                <MdPreview  v-model="report" theme="dark" language="en-US" page-fullscreen read-only code-theme="github"
+                            :toolbars="empty_list" disabled/>
               </div>
             </div>
 
@@ -405,21 +408,24 @@ import router from "@/router";
 import hljs from 'highlight.js/lib/core'
 import markdown from 'highlight.js/lib/languages/markdown'
 import plaintext from 'highlight.js/lib/languages/plaintext'
+import {MdPreview} from "md-editor-v3";
 // import {useMessage} from "naive-ui";
 
 export default {
   name: "StaticAnalysis",
+  components: {MdPreview},
   methods: {
     router() {
       return router
     }
   },
   setup(){
+    const empty_list=ref([]);
     const route = useRoute();
     const hashcode=route.params.hashcode;
 
     const information=ref(null);
-    const mode=ref(1);
+    const mode=ref(0);
     const app_info=ref();
     const app_comps=ref();
     const binary_results=ref();
@@ -474,6 +480,18 @@ export default {
       }).catch((error)=>{
         console.log("报告生成出现错误："+error);
       })
+    }
+
+    const exportMD=()=>{
+      const blob = new Blob([report.value], {
+        type: 'text/markdown'
+      })
+      const objectURL = URL.createObjectURL(blob)
+      const aTag = document.createElement('a')
+      aTag.href = objectURL
+      aTag.download = "Report.md"
+      aTag.click()
+      URL.revokeObjectURL(objectURL)
     }
 
     scanFile({"hash":hashcode}).then((res)=>{
@@ -589,6 +607,8 @@ export default {
       generating,
       reversePath,
       regenerate,
+      empty_list,
+      exportMD
     };
   }
 }

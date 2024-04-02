@@ -8,18 +8,26 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@vavt/markdown-theme": "^3.2.2",
     "@vicons/ionicons5": "^0.12.0",
     "async": "^3.2.5",
     "axios": "^1.6.7",
     "core-js": "^3.8.3",
+    "echarts": "^5.5.0",
     "element-plus": "^2.6.1",
     "highlight.js": "^11.9.0",
+    "md-editor-v3": "^4.12.1",
+    "mdeditor": "^0.1.1",
+    "vditor": "^3.10.2",
     "vue": "^3.2.13",
+    "vue-loader": "^17.4.2",
+    "vue-markdown-loader": "^2.5.0",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
+    "@babel/plugin-transform-private-methods": "^7.24.1",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "^5.0.8",

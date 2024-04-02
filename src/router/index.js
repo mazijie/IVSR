@@ -3,42 +3,44 @@ import {createRouter,createWebHistory} from 'vue-router';
 import MainPage from "@/view/MainPage.vue";
 import DashBoard from "@/view/DashBoard.vue";
 import StaticAnalysis from "@/components/DashBoard/StaticAnalysis.vue";
-import DynamicsAnalysis from "@/components/DashBoard/DynamicsAnalysis.vue";
 import SourceCode from "@/components/DashBoard/SourceCode.vue";
-// import HeadsQ from "@/components/Heads.vue";
+import GeneralAnalysis from "@/components/DashBoard/GeneralAnalysis.vue";
+import ContactUS from "@/view/Contact.vue"
 /**  各个模块 */
 const Router = createRouter({
     history: createWebHistory(),
     routes: [
-        { path: '/', name:'MainPage', component: MainPage},
+        { path: '/', name:'main-page', component: MainPage},
         {
             path: '/dashboard',
             name: '/dashboard',
             component:DashBoard,
-            // redirect : {name:'docEdit'},
             children:[
-                // {
-                //     path: '/doc-edit/:doc_name/:doc_id/:isNewDoc/:doc_temp/:isVstEditable',
-                //     name: 'docEdit',
-                //     component:DocEdit,
-                // },
+                {
+                    path: '/analysis/:hashcode',
+                    name: 'general-analysis',
+                    component:GeneralAnalysis,
+                },
                 {
                     path: '/static-analysis/:hashcode',
                     name: 'static-analysis',
                     component:StaticAnalysis,
                 },
                 {
-                    path: '/dynamics-analysis',
-                    name: 'dynamics-analysis',
-                    component:DynamicsAnalysis,
-                },
-                {
                     path: '/sourcecode/:hashcode/:filepath',
                     name: 'sourcecode',
                     component:SourceCode,
-                }
-            ]
+                },
+
+            ],
         },
+        {
+            path: '/contact',
+            name: 'contact',
+            component:ContactUS,
+        },
+
+
     //     //空页面，用于刷新，会跳转到团队的首页
     //     {
     //         path:'/empty',
@@ -48,7 +50,6 @@ const Router = createRouter({
     //     //错误路由访问
     //     { path: '/:pathMatch(.*)*',
     //         redirect:'/'}
-    //     // ... 其他路由规则
     ]
 });
 // const isAuthenticated = async function() {
