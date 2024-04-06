@@ -78,7 +78,7 @@
                     :src="'/api/file/' + hashcode + '/icon'"
                     fallback-src="https://bpic.588ku.com/element_origin_min_pic/19/04/23/ccb94aca0ea5f54c35df8b000c052511.jpg"
                 />
-                <div style="padding: 10px;width: 380px">
+                <div style="padding: 10px;width: 380px" translate="no">
                   <ul>
                     <li><p>名称：{{app_info.app_name}}</p></li>
                     <li><p>包名：{{app_info.package_name}}</p></li>
@@ -176,7 +176,7 @@
             </div>
           </div>
           <!---应用组件概览-->
-          <div v-else-if="mode===1">
+          <div v-else-if="mode===1" translate="no">
             <p class="sub_title">·APP组件信息</p>
             <div class="sub_block" style="height: 100px;">
               <div style="margin-left: 40px;">
@@ -247,7 +247,7 @@
           <div v-else-if="mode===2">
             <div style="height: 750px;">
               <p class="sub_title">·恶意与滥用权限情况</p>
-              <div class="sub_block" style="height: 300px;display: flex">
+              <div class="sub_block" style="height: 300px;display: flex"  translate="no">
                 <div id="premPiePattern" style="width: 300px;height: 100%">
 
                 </div>
@@ -332,7 +332,7 @@
           </div>
           <div v-else-if="mode===4">
             <p class="sub_title">·特征提取分析(共{{key_features.length}}项)</p>
-            <div class="sub_block">
+            <div class="sub_block" translate="no">
               <div style="width:calc(100% - 40px);margin: 10px;padding: 10px;border-radius: 10px;">
 <!--                <n-data-table-->
 <!--                    :columns="key_features_columns"-->
@@ -353,7 +353,7 @@
           </div>
           <div v-else-if="mode===5">
             <p class="sub_title">·动态链接库(共{{binary_results.length}}个)</p>
-            <div class="sub_block">
+            <div class="sub_block" translate="no">
               <div style="padding: 20px;border-radius: 20px;">
                 <n-data-table
                     :columns="binary_columns"
@@ -422,7 +422,7 @@
                           <!--                  <el-table-column type="index"></el-table-column>-->
 
                           <el-table-column v-slot="{ row }" label="文件">
-                            <span><a :href="'/sourcecode/' + hashcode + '/' + reversePath(row.file)" target="_blank">{{row.file}}</a></span>
+                            <span translate="no"><a :href="'/sourcecode/' + hashcode + '/' + reversePath(row.file)" target="_blank">{{row.file}}</a></span>
                           </el-table-column>
                           <el-table-column v-slot="{ row }" label="行号">
                             <n-space><span v-for="item in row.lines_no" :key="item">{{item}}</span></n-space>
@@ -710,7 +710,10 @@ export default {
     ]
     const perm_columns = [
       {
-        title: "名称", key: "name"
+        title: "名称", key: "name",
+        render(row){
+          return h('span', {translate:"no"},row.name)
+        }
       },
       {
         title: "问题级别", key: "severity",

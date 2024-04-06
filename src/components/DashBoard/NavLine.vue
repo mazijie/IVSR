@@ -1,5 +1,5 @@
 <template>
-  <div id="mainblock" style="width: 100vw;margin: 0;position: relative;height: 100px;display: flex">
+  <div id="mainblock" style="width: 100vw;margin: 0;position: relative;height: 100px;display: flex" translate="no">
     <div id="logo" style="margin: 20px;position: absolute">
       <n-space>
         <img width="50" src="@/assets/logo.jpg" alt="LOGO" style="border-radius: 15px;"/>
