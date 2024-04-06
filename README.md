@@ -1,4 +1,4 @@
-# frontend
+# IVSR —— Intelli Voyage Serenty Realm
 
 ## Project setup
 ```
