@@ -1130,52 +1130,55 @@ export default {
               ],
             }
             myChart.setOption(option)
-            // 自动轮播
-            let n = 0
-            let Carousel = setInterval(function () {
-              myChart.dispatchAction({
-                type: 'showTip',
-                seriesIndex: 0,
-                name: domainsCountForCountry.value[n].name,
+            if(domainsCountForCountry.value.length!==0){
+              // 自动轮播
+              let n = 0
+              let Carousel = setInterval(function () {
+                myChart.dispatchAction({
+                  type: 'showTip',
+                  seriesIndex: 0,
+                  name: domainsCountForCountry.value[n].name,
+                })
+                myChart.dispatchAction({
+                  type: 'mapToggleSelect',
+                  seriesIndex: 0,
+                  name: domainsCountForCountry.value[n].name,
+                })
+                n++
+                if (n === domainsCountForCountry.value.length) {
+                  n = 0
+                }
+              }, 3000)
+              // 鼠标移入有mapData数据的国家清除定时器
+              myChart.on('mouseover', function (params) {
+                if (params.data) {
+                  clearInterval(Carousel)
+                }
               })
-              myChart.dispatchAction({
-                type: 'mapToggleSelect',
-                seriesIndex: 0,
-                name: domainsCountForCountry.value[n].name,
+              // 鼠标移出有mapData数据的国家清除定时器，并开起新的定时器
+              myChart.on('mouseout', function (params) {
+                if (params.data) {
+                  clearInterval(Carousel) //停止定时器
+                  Carousel = setInterval(function () {
+                    myChart.dispatchAction({
+                      type: 'showTip',
+                      seriesIndex: 0,
+                      name: domainsCountForCountry.value[n].name,
+                    })
+                    myChart.dispatchAction({
+                      type: 'mapToggleSelect',
+                      seriesIndex: 0,
+                      name: domainsCountForCountry.value[n].name,
+                    })
+                    n++
+                    if (n === domainsCountForCountry.value.length) {
+                      n = 0
+                    }
+                  }, 3000)
+                }
               })
-              n++
-              if (n === domainsCountForCountry.value.length) {
-                n = 0
-              }
-            }, 3000)
-            // 鼠标移入有mapData数据的国家清除定时器
-            myChart.on('mouseover', function (params) {
-              if (params.data) {
-                clearInterval(Carousel)
-              }
-            })
-            // 鼠标移出有mapData数据的国家清除定时器，并开起新的定时器
-            myChart.on('mouseout', function (params) {
-              if (params.data) {
-                clearInterval(Carousel) //停止定时器
-                Carousel = setInterval(function () {
-                  myChart.dispatchAction({
-                    type: 'showTip',
-                    seriesIndex: 0,
-                    name: domainsCountForCountry.value[n].name,
-                  })
-                  myChart.dispatchAction({
-                    type: 'mapToggleSelect',
-                    seriesIndex: 0,
-                    name: domainsCountForCountry.value[n].name,
-                  })
-                  n++
-                  if (n === domainsCountForCountry.value.length) {
-                    n = 0
-                  }
-                }, 3000)
-              }
-            })
+            }
+
           })
 
     }
